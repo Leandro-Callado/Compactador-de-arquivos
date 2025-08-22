@@ -1,2 +1,16 @@
-# Recomendador-de-Livros
-Um sistema inteligente de recomendação de livros que utiliza IA para ajudar usuários a encontrar livros baseados em suas preferências. O sistema combina uma base de dados local do Goodreads com ferramentas de busca online para oferecer recomendações personalizadas.
+📘 Tema a definir<br>
+
+📝 Descrição<br>
+
+⚙️ Tecnologias e Ferramentas Utilizadas<br>
+• 
+
+💻 Como Rodar o Projeto<br>
+Instruções passo a passo para executar o projeto localmente:<br>
+
+👥 Colaboradores<br>
+[@Lucas]()<br>
+[@Leandro]()<br>
+
+📄 Licença<br>
+Este projeto está licenciado sob a MIT License.<br>
