@@ -17,11 +17,6 @@ def compactar_tar_gz(arquivos, saida):
         for arquivo in arquivos:
             tar.add(arquivo, arcname=os.path.basename(arquivo))
 
-class compactadorApp:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Compactador by Leandro & Lucas")
-
 window = tk.Tk()
 window.title("Compactador by Leandro & Lucas")
 window.geometry("400x300")
