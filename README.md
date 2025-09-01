@@ -10,8 +10,8 @@
 Instruções passo a passo para executar o projeto localmente:<br>
 
 👥 Colaboradores<br>
-[@Lucas]()<br>
-[@Leandro]()<br>
+[@Lucas](https://github.com/GabVP)<br>
+[@Leandro](https://github.com/Leandro-Callado)<br>
 
 📄 Licença<br>
 Este projeto está licenciado sob a MIT License.<br>
