@@ -16,41 +16,110 @@ def compactar_tar_gz(arquivos, saida):
     with tarfile.open(saida, "w:gz") as tar:
         for arquivo in arquivos:
             tar.add(arquivo, arcname=os.path.basename(arquivo))
+            
+arquivos_selecionados = []
+
+def selecionar_arquivos():
+    """Abre a janela para selecionar um ou mais arquivos e os guarda na lista global."""
+    global arquivos_selecionados
+    
+    arquivos = filedialog.askopenfilenames(title="Selecione um ou mais arquivos")
+    
+    if arquivos:
+        arquivos_selecionados = list(arquivos) 
+        label_status.config(text=f"{len(arquivos_selecionados)} arquivo(s) selecionado(s).")
+        zip_button.config(state="normal")
+        tar_button.config(state="normal")
+        targz_button.config(state="normal")
+    else:
+        # Se o usuário cancelou, limpa a lista e desativa os botões
+        arquivos_selecionados = []
+        label_status.config(text="Nenhum arquivo selecionado.")
+        zip_button.config(state="disabled")
+        tar_button.config(state="disabled")
+        targz_button.config(state="disabled")
+
+
+def iniciar_compactacao(formato):
+    """Inicia o processo de compactação baseado no formato escolhido."""
+    # Verifica se há arquivos na lista para compactar
+    if not arquivos_selecionados:
+        messagebox.showwarning("Atenção", "Por favor, selecione os arquivos primeiro!")
+        return
+
+    tipos_de_arquivo = {
+        'zip': [("Arquivo ZIP", "*.zip")],
+        'tar': [("Arquivo TAR", "*.tar")],
+        'targz': [("Arquivo TAR.GZ", "*.tar.gz")]
+    }
+    extensao_padrao = f".{formato.replace('targz', 'tar.gz')}"
+
+    # Abre a janela "Salvar como" para o usuário escolher o nome e local do arquivo final
+    caminho_saida = filedialog.asksaveasfilename(
+        title=f"Salvar arquivo {formato.upper()} como...",
+        defaultextension=extensao_padrao,
+        filetypes=tipos_de_arquivo[formato]
+    )
+    
+    if caminho_saida:
+        try:
+            if formato == 'zip':
+                compactar_zip(arquivos_selecionados, caminho_saida)
+            elif formato == 'tar':
+                compactar_tar(arquivos_selecionados, caminho_saida)
+            elif formato == 'targz':
+                compactar_tar_gz(arquivos_selecionados, caminho_saida)
+            
+            messagebox.showinfo("Sucesso!", f"Arquivos compactados com sucesso em:\n{caminho_saida}")
+        except Exception as e:
+            messagebox.showerror("Erro", f"Ocorreu um erro durante a compactação:\n{e}")
 
 window = tk.Tk()
 window.title("Compactador by Leandro & Lucas")
-window.geometry("400x300")
+window.geometry("400x350")
 
-label = tk.Label(
-    text="Escolha o formato da compactação: ",
-    fg="black",
-    width=40,
-    height=4
+btn_selecionar = tk.Button(
+    text="1. Selecionar Arquivos",
+    font=("Helvetica", 10, "bold"),
+    width=30,
+    height=2,
+    command=selecionar_arquivos 
 )
-label.pack(pady=20)
+btn_selecionar.pack(pady=15)
 
-Zip = tk.Button(
+label_status = tk.Label(text="Nenhum arquivo selecionado.")
+label_status.pack(pady=(0, 10))
+
+label_escolha = tk.Label(
+    text="2. Escolha o formato da compactação:",
+    fg="black",
+)
+label_escolha.pack(pady=10)
+
+zip_button = tk.Button(
     text="Compactar em ZIP",
-    width=20,
-    height=3,
-    bg="white",
-    fg="black",
+    width=25,
+    height=2,
+    state="disabled",
+    command=lambda: iniciar_compactacao('zip')
 )
-tar = tk.Button(
+tar_button = tk.Button(
     text="Compactar em TAR",
-    width=20,
-    height=3,
-    bg="white",
-    fg="black",
+    width=25,
+    height=2,
+    state="disabled",
+    command=lambda: iniciar_compactacao('tar')
 )
-targz = tk.Button(
+targz_button = tk.Button(
     text="Compactar em TAR.GZ",
-    width=20,
-    height=3,
-    bg="white",
-    fg="black",
+    width=25,
+    height=2,
+    state="disabled",
+    command=lambda: iniciar_compactacao('targz')
 )
-Zip.pack(pady=1)
-tar.pack(pady=1)
-targz.pack(pady=1)
+
+zip_button.pack(pady=2)
+tar_button.pack(pady=2)
+targz_button.pack(pady=2)
+
 window.mainloop()
