@@ -157,13 +157,13 @@ label_escolha = tk.Label(
     fg="black",
 )
 
-
 zip_button = tk.Button(
     text="Compactar em ZIP",
     width=20,
     height=3,
     bg="white",
     fg="black",
+    command=lambda: iniciar_compactacao('zip'),
 )
 tar_button = tk.Button(
     text="Compactar em TAR",
@@ -171,6 +171,7 @@ tar_button = tk.Button(
     height=3,
     bg="white",
     fg="black",
+    command=lambda: iniciar_compactacao('tar'),
 )
 targz_button = tk.Button(
     text="Compactar em TAR.GZ",
@@ -178,6 +179,7 @@ targz_button = tk.Button(
     height=3,
     bg="white",
     fg="black",
+    command=lambda: iniciar_compactacao('targz'),
 )
 label_status.pack(pady=10)
 selecionar_arquivos_button.pack(pady=2)
