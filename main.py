@@ -141,10 +141,39 @@ def iniciar_compactacao(formato):
 window = tk.Tk()
 window.title("Compactador by Leandro & Lucas")
 window.geometry("400x300")
+# ---------------------- GIF animado ----------------------
+# Carrega todos os frames do GIF
+frames = []
+i = 0
+while True:
+    try:
+        frame = tk.PhotoImage(file='fundogif.gif', format=f'gif -index {i}')
+        frames.append(frame)
+        i += 1
+    except tk.TclError:
+        break  # Sai do loop quando não houver mais frames
+
+label_fundo = tk.Label(window)
+label_fundo.place(x=0, y=0, relwidth=1, relheight=1)
+
+def animar_gif(ind=0):
+    frame = frames[ind]
+    label_fundo.configure(image=frame)
+    label_fundo.image = frame  # mantém referência
+    window.after(100, animar_gif, (ind+1) % len(frames))  # muda frame a cada 100ms
+
+animar_gif()  # inicia a animação
+
+fundo = tk.PhotoImage(file="fundogif.gif")
+
+# Coloca a imagem como label de fundo
+label_fundo = tk.Label(window, image=fundo)
+label_fundo.place(x=0, y=0, relwidth=1, relheight=1)
 
 label_status = tk.Label(
     text="Selecione os arquivos para compactar: ",
     fg="black",
+    bg="#ffffff"
 )
 selecionar_arquivos_button = tk.Button(
     text="Selecionar Arquivos",
@@ -188,4 +217,7 @@ zip_button.pack(pady=2)
 tar_button.pack(pady=2)
 targz_button.pack(pady=2)
 
+# Exibir na interface
+label = tk.Label(window, image=fundo)
+label.pack()
 window.mainloop()
