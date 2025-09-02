@@ -142,13 +142,23 @@ window = tk.Tk()
 window.title("Compactador by Leandro & Lucas")
 window.geometry("400x300")
 
-label = tk.Label(
+label_status = tk.Label(
+    text="Selecione os arquivos para compactar: ",
+    fg="black",
+)
+selecionar_arquivos_button = tk.Button(
+    text="Selecionar Arquivos",
+    fg="black",
+    command=selecionar_arquivos,
+)
+
+label_escolha = tk.Label(
     text="Escolha o formato da compactação: ",
     fg="black",
 )
-label_escolha.pack(pady=10)
 
-Zip = tk.Button(
+
+zip_button = tk.Button(
     text="Compactar em ZIP",
     width=20,
     height=3,
@@ -169,7 +179,9 @@ targz_button = tk.Button(
     bg="white",
     fg="black",
 )
-
+label_status.pack(pady=10)
+selecionar_arquivos_button.pack(pady=2)
+label_escolha.pack(pady=10)
 zip_button.pack(pady=2)
 tar_button.pack(pady=2)
 targz_button.pack(pady=2)
