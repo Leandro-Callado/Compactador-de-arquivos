@@ -10,21 +10,14 @@
 Instruções passo a passo para executar o projeto localmente:<br>
 ```bash
 # Clone o repositório
-git clone https://github.com/SEU-USUARIO/NOME-DO-PROJETO.git
+git clone https://github.com/Leandro-Callado/Compactador-de-arquivos
 
 # Acesse a pasta
-cd NOME-DO-PROJETO
-
-# Instale Pillow caso queira suporte a GIFs animados
-pip install pillow
+cd Compactador-de-arquivos
 
 # Execute o projeto
 python main.py
 
-Observações:
-Certifique-se de que o arquivo fundogif.gif esteja na mesma pasta do main.py.
-
-No Linux/Mac, dependendo da versão do Python, você pode precisar usar python3 main.py.
 ```
 
 👥 Colaboradores<br>
