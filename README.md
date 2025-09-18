@@ -1,6 +1,7 @@
 📘 Tema: Compactador de arquivos<br>
 
 📝 Descrição<br>
+Programa criado em python para compactação de arquivos em ZIP, TAR e TAR.GZ
 
 ⚙️ Tecnologias e Ferramentas Utilizadas<br>
 • Phyton <br>
