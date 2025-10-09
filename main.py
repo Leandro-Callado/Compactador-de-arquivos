@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import zipfile, tarfile, os
 
-# --- Funções de compactação ---
 def compactar_zip(arquivos, saida):
     with zipfile.ZipFile(saida, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for arquivo in arquivos:
@@ -18,10 +17,8 @@ def compactar_tar_gz(arquivos, saida):
         for arquivo in arquivos:
             tar.add(arquivo, arcname=os.path.basename(arquivo))
 
-# --- Variável global para arquivos selecionados ---
 arquivos_selecionados = []
 
-# --- Função para selecionar arquivos ---
 def selecionar_arquivos():
     global arquivos_selecionados
     arquivos = filedialog.askopenfilenames(title="Selecione um ou mais arquivos")
@@ -39,7 +36,6 @@ def selecionar_arquivos():
         tar_button.config(state="disabled")
         targz_button.config(state="disabled")
 
-# --- Função para iniciar compactação ---
 def iniciar_compactacao(formato):
     if not arquivos_selecionados:
         messagebox.showwarning("Atenção", "Por favor, selecione os arquivos primeiro!")
@@ -72,7 +68,6 @@ def iniciar_compactacao(formato):
         except Exception as e:
             messagebox.showerror("Erro", f"Ocorreu um erro durante a compactação:\n{e}")
 
-# --- Interface gráfica ---
 window = tk.Tk()
 window.title("Compactador by Leandro & Lucas")
 window.geometry("400x300")
